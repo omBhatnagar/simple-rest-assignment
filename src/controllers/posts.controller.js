@@ -1,8 +1,8 @@
 const {
-	getPosts,
-	createPosts,
-	updatePosts,
-	deletePosts,
+	getPostsService,
+	createPostService,
+	updatePostService,
+	deletePostService,
 } = require("../services/posts.service");
 const controllerErrorHandler = require("../util/controller.errorhandler");
 const { notFound, badRequest } = require("../util/controllerBadResponse");
@@ -10,7 +10,7 @@ const { notFound, badRequest } = require("../util/controllerBadResponse");
 exports.getPosts = async (req, res, next) => {
 	try {
 		// Fetch posts
-		const posts = await getPosts();
+		const posts = await getPostsService();
 		if (posts.status) {
 			if (posts.body.length > 0)
 				return res.status(200).send({
@@ -30,7 +30,7 @@ exports.createPost = async (req, res, next) => {
 	const { postTitle, postBody } = req.body;
 	try {
 		// Call service to create post
-		const post = await createPosts(postTitle, postBody);
+		const post = await createPostService(postTitle, postBody);
 		if (post.status === true)
 			return res.status(201).send({
 				status: true,
@@ -49,7 +49,7 @@ exports.updatePost = async (req, res, next) => {
 	const { postId } = req.params;
 	try {
 		// Call service to update post
-		const post = await updatePosts(postId, postTitle, postBody);
+		const post = await updatePostService(postId, postTitle, postBody);
 		if (post.status === true)
 			return res.status(201).send({
 				status: true,
@@ -70,7 +70,7 @@ exports.deletePost = async (req, res, next) => {
 	const { postId } = req.params;
 	try {
 		// Delete post
-		const post = await deletePosts(postId);
+		const post = await deletePostService(postId);
 		if (post.status === true)
 			return res.status(200).send({
 				status: true,

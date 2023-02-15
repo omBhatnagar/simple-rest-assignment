@@ -6,7 +6,7 @@ const { Posts } = require("../database/models");
 // Service return handler
 const serviceErrorHandler = require("../util/service.errorhandler");
 
-exports.createPosts = async (postTitle, postBody) => {
+exports.createPostService = async (postTitle, postBody) => {
 	try {
 		// Check if fields are empty
 		if (!postTitle || !postBody)
@@ -27,7 +27,7 @@ exports.createPosts = async (postTitle, postBody) => {
 	}
 };
 
-exports.getPosts = async () => {
+exports.getPostsService = async () => {
 	try {
 		// Fetch all posts
 		const posts = await Posts.findAll();
@@ -37,7 +37,7 @@ exports.getPosts = async () => {
 	}
 };
 
-exports.updatePosts = async (postId, postTitle, postBody) => {
+exports.updatePostService = async (postId, postTitle, postBody) => {
 	try {
 		// Check if post exists
 		const post = await Posts.findByPk(postId);
@@ -66,7 +66,7 @@ exports.updatePosts = async (postId, postTitle, postBody) => {
 	}
 };
 
-exports.deletePosts = async (postId) => {
+exports.deletePostService = async (postId) => {
 	try {
 		// Check if post exists
 		const post = await Posts.findByPk(postId);
