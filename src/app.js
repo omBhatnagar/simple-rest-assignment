@@ -9,8 +9,9 @@ const app = Express();
 // Initializing dotenv
 dotenv.config();
 
-// Importing routes
+// Importing routes and helper functions
 const routes = require("./routes");
+const { handleError } = require("./helpers/error");
 
 // Middleware
 // Using cors to disable cross origin resource sharing
@@ -28,10 +29,7 @@ app.use("/api", routes);
 
 // Error handling middleware
 app.use((error, req, res, next) => {
-	console.log({ error });
-	return res.status(error.httpStatusCode).send({
-		message: error.message,
-	});
+	handleError(error, res);
 });
 
 // PORT
