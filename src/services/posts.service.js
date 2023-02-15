@@ -2,6 +2,7 @@ const { v4: uuidv4 } = require("uuid");
 
 // Model
 const { Posts } = require("../database/models");
+// Helpers
 const checkIfValidUUID = require("../helpers/checkIfValidUuid");
 const { ErrorHandler } = require("../helpers/error");
 
