@@ -1,15 +1,19 @@
 const { v4: uuidv4 } = require("uuid");
 
 // Model
-const { Posts } = require("..database/models");
+const { Posts } = require("../database/models");
 
 // Service return handler
 const serviceErrorHandler = require("../util/service.errorhandler");
 
-exports.createPosts = async ({ postTitle, postBody }) => {
+exports.createPosts = async (postTitle, postBody) => {
 	try {
 		// Check if fields are empty
-		if (!postTitle || !postBody) throw new Error("Fields cannot be empty!");
+		if (!postTitle || !postBody)
+			return {
+				status: false,
+				message: "Fields cannot be empty!",
+			};
 
 		// Create post in Posts table
 		const createdPost = await Posts.create({

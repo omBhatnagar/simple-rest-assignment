@@ -1,9 +1,12 @@
 const router = require("express").Router();
 
-// Create posts
+// Importing controller
+const { getPosts, createPost } = require("../controllers/posts.controller");
 
+// Create posts
+router.post("/createpost", createPost);
 // Get posts
-// router.get('/getposts')
+router.get("/getposts", getPosts);
 
 // Update posts
 

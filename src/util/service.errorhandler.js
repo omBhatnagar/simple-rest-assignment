@@ -1,5 +1,8 @@
 const serviceErrorHandler = (error) => {
-	status: false, error;
+	return {
+		status: false,
+		error: error.message,
+	};
 };
 
 module.exports = serviceErrorHandler;
