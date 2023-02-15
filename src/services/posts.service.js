@@ -70,7 +70,7 @@ exports.deletePosts = async (postId) => {
 	try {
 		// Check if post exists
 		const post = await Posts.findByPk(postId);
-		if (post === null) throw new Error("Post does not exists!");
+		if (post === null) return { status: false, message: "Post not found" };
 
 		// Delete post
 		await Posts.destroy({

@@ -5,6 +5,7 @@ const {
 	getPosts,
 	createPost,
 	updatePost,
+	deletePost,
 } = require("../controllers/posts.controller");
 
 // Create posts
@@ -17,5 +18,6 @@ router.get("/getposts", getPosts);
 router.put("/updatepost/:postId", updatePost);
 
 // Delete posts
+router.delete("/deletepost/:postId", deletePost);
 
 module.exports = router;

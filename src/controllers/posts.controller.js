@@ -2,6 +2,7 @@ const {
 	getPosts,
 	createPosts,
 	updatePosts,
+	deletePosts,
 } = require("../services/posts.service");
 const controllerErrorHandler = require("../util/controller.errorhandler");
 const { notFound, badRequest } = require("../util/controllerBadResponse");
@@ -59,6 +60,27 @@ exports.updatePost = async (req, res, next) => {
 		if (post.status === "error") throw new Error(post.error);
 
 		// Send not foud response if service returned not found
+		return notFound(res);
+	} catch (error) {
+		return next(controllerErrorHandler(error));
+	}
+};
+
+exports.deletePost = async (req, res, next) => {
+	const { postId } = req.params;
+	try {
+		// Delete post
+		const post = await deletePosts(postId);
+		if (post.status === true)
+			return res.status(200).send({
+				status: true,
+				code: 200,
+				message: "Post deleted.",
+			});
+		// Throw error if service returned error
+		if (post.status === "error") throw new Error(post.error);
+
+		// Return not found
 		return notFound(res);
 	} catch (error) {
 		return next(controllerErrorHandler(error));
