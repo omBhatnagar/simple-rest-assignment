@@ -1,6 +1,6 @@
 const serviceErrorHandler = (error) => {
 	return {
-		status: false,
+		status: "error",
 		error: error.message,
 	};
 };

@@ -37,11 +37,15 @@ exports.getPosts = async () => {
 	}
 };
 
-exports.updatePosts = async ({ postId, postTitle, postBody }) => {
+exports.updatePosts = async (postId, postTitle, postBody) => {
 	try {
 		// Check if post exists
-		const post = Posts.findByPk(postId);
-		if (post === null) throw new Error("No post found!");
+		const post = await Posts.findByPk(postId);
+		if (post === null)
+			return {
+				status: false,
+				message: "No post found!",
+			};
 
 		// Update post
 		await Posts.update(
